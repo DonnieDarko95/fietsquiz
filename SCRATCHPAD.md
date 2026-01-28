@@ -53,7 +53,7 @@ js/app.js           - Spellogica, navigatie, 6 game engines, Tailwind classes
 - [x] **DEBUGGING SESSION - 6 Critical Bugs Fixed**
 - [x] **UI REDESIGN - Tailwind CSS + 22 integration fixes**
 - [x] **Browser testing - Splash, Home, Map, Level, Quiz OK**
-- [ ] GitHub Pages deployment
+- [x] GitHub Pages deployment: https://verandert-gewoon.github.io/fietsquiz/
 
 ---
 
@@ -232,8 +232,10 @@ Game should now be fully functional. Test each mode to verify.
 - 15 aanmoedigingen, 10 foutberichten
 
 ## Deployment
+- **URL**: https://verandert-gewoon.github.io/fietsquiz/
 - GitHub Pages vanuit main branch (root directory)
 - Geen build stap nodig
+- `.nojekyll` file voorkomt Jekyll processing
 
 ---
 
