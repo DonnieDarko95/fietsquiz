@@ -563,7 +563,7 @@ function renderMap() {
     const maxStars = GameState.getLevelMaxStars(level.id);
 
     const levelNode = document.createElement('div');
-    levelNode.className = `level-node ${isUnlocked ? 'bg-white rounded-2xl shadow-lg p-6 cursor-pointer hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center gap-6' : 'bg-gray-100 rounded-2xl shadow-sm p-6 opacity-60 flex items-center gap-6'}`;
+    levelNode.className = `level-node ${isUnlocked ? 'bg-white rounded-3xl shadow-premium border border-gray-100 p-6 cursor-pointer hover:shadow-glow hover:-translate-y-1 transition-all duration-300 flex items-center gap-6' : 'bg-gray-100 rounded-3xl shadow-sm border border-gray-200 p-6 opacity-60 flex items-center gap-6'}`;
     levelNode.dataset.levelId = level.id;
 
     // Add connecting line (except for first level)
@@ -574,17 +574,17 @@ function renderMap() {
     }
 
     levelNode.innerHTML = `
-      <div class="level-icon w-16 h-16 rounded-full flex items-center justify-center text-3xl shadow-md text-white" style="background-color: ${level.color || '#4A90E2'}">${level.icon}</div>
+      <div class="level-icon w-20 h-20 rounded-full flex items-center justify-center text-4xl shadow-premium text-white" style="background: linear-gradient(135deg, ${level.color || '#4A90E2'} 0%, ${level.color || '#4A90E2'}dd 100%)">${level.icon}</div>
       <div class="level-info flex-1">
-        <div class="level-name text-xl font-bold text-gray-800">${level.name}</div>
+        <div class="level-name text-2xl font-black text-slate-900">${level.name}</div>
         ${isUnlocked ? `
-          <div class="level-progress text-lg mt-1">
-            <span class="stars">${'⭐'.repeat(Math.min(stars, 3))}</span>
-            <span class="star-count">${stars}/${maxStars}</span>
+          <div class="level-progress text-lg mt-2 flex items-center gap-3">
+            <span class="stars drop-shadow">${'⭐'.repeat(Math.min(stars, 3))}</span>
+            <span class="star-count font-bold text-slate-600">${stars}/${maxStars}</span>
           </div>
         ` : `
-          <div class="level-locked">
-            <span class="lock-icon text-2xl">🔒</span>
+          <div class="level-locked mt-2">
+            <span class="lock-icon text-3xl opacity-50">🔒</span>
           </div>
         `}
       </div>
@@ -647,30 +647,30 @@ function renderLevel(levelId) {
 
     const lessonCard = document.createElement('div');
     lessonCard.className = isCompleted
-      ? 'lesson-card bg-white rounded-2xl shadow-md p-5 cursor-pointer hover:shadow-xl hover:scale-[1.02] transition-all duration-300 flex items-center gap-4 border-l-4 border-green-500'
-      : `lesson-card ${isUnlocked ? 'bg-white rounded-2xl shadow-md p-5 cursor-pointer hover:shadow-xl hover:scale-[1.02] transition-all duration-300 flex items-center gap-4' : 'bg-gray-100 rounded-2xl shadow-sm p-5 opacity-50 flex items-center gap-4'}`;
+      ? 'lesson-card bg-white rounded-3xl shadow-premium border border-emerald-200 p-6 cursor-pointer hover:shadow-glow hover:-translate-y-1 transition-all duration-300 flex items-center gap-5 border-l-4 border-emerald-500'
+      : `lesson-card ${isUnlocked ? 'bg-white rounded-3xl shadow-premium border border-gray-100 p-6 cursor-pointer hover:shadow-glow hover:-translate-y-1 transition-all duration-300 flex items-center gap-5' : 'bg-gray-100 rounded-3xl shadow-sm border border-gray-200 p-6 opacity-50 flex items-center gap-5'}`;
     lessonCard.dataset.lessonId = lessonId;
 
     lessonCard.innerHTML = `
-      <div class="lesson-icon w-14 h-14 rounded-xl bg-gradient-to-br from-orange-100 to-amber-100 flex items-center justify-center text-2xl">${modeIcons[lesson.mode] || '📝'}</div>
+      <div class="lesson-icon w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-100 to-amber-100 flex items-center justify-center text-3xl shadow-sm border border-orange-200">${modeIcons[lesson.mode] || '📝'}</div>
       <div class="lesson-info flex-1">
-        <h3 class="lesson-name text-lg font-bold text-gray-800">${lesson.name}</h3>
-        <div class="lesson-meta flex items-center gap-3 mt-1 text-sm text-gray-500">
-          <span class="lesson-mode">${getModeDisplayName(lesson.mode)}</span>
-          ${lesson.xpReward ? `<span class="lesson-xp font-semibold text-amber-600">+${lesson.xpReward} XP</span>` : ''}
+        <h3 class="lesson-name text-xl font-black text-slate-900">${lesson.name}</h3>
+        <div class="lesson-meta flex items-center gap-3 mt-2 text-sm">
+          <span class="lesson-mode text-slate-600 font-semibold">${getModeDisplayName(lesson.mode)}</span>
+          ${lesson.xpReward ? `<span class="lesson-xp font-bold text-amber-600 bg-amber-50 px-2 py-1 rounded-full">+${lesson.xpReward} XP</span>` : ''}
         </div>
       </div>
       ${isCompleted ? `
         <div class="lesson-status flex-shrink-0">
-          <span class="stars text-lg">${'⭐'.repeat(stars)}</span>
+          <span class="stars text-2xl drop-shadow">${'⭐'.repeat(stars)}</span>
         </div>
       ` : isUnlocked ? `
         <div class="lesson-status flex-shrink-0">
-          <button class="btn-start-lesson bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold py-2 px-5 rounded-xl text-sm hover:from-orange-600 hover:to-amber-600 transition-all">Start</button>
+          <button class="btn-start-lesson bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-black py-3 px-6 rounded-2xl text-sm shadow-premium hover:shadow-glow hover:-translate-y-0.5 active:scale-95 transition-all">Start</button>
         </div>
       ` : `
         <div class="lesson-status flex-shrink-0">
-          <span class="lock-icon text-2xl">🔒</span>
+          <span class="lock-icon text-3xl opacity-50">🔒</span>
         </div>
       `}
     `;
@@ -703,13 +703,13 @@ function renderBadges() {
     const isEarned = GameState.badges.includes(badge.id);
 
     const badgeCard = document.createElement('div');
-    badgeCard.className = `badge-card ${isEarned ? 'bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300' : 'bg-gray-100 rounded-2xl shadow-sm p-6 text-center opacity-50'}`;
+    badgeCard.className = `badge-card ${isEarned ? 'bg-white rounded-3xl shadow-premium border border-gray-100 p-7 text-center hover:shadow-glow hover:-translate-y-1 transition-all duration-300' : 'bg-gray-100 rounded-3xl shadow-sm border border-gray-200 p-7 text-center opacity-50'}`;
     badgeCard.dataset.badgeId = badge.id;
 
     badgeCard.innerHTML = `
-      <div class="badge-icon text-5xl mb-3 block">${isEarned ? badge.icon : '❓'}</div>
-      <h3 class="badge-name text-lg font-bold text-gray-800">${isEarned ? badge.name : '???'}</h3>
-      ${isEarned ? `<p class="badge-description text-sm text-gray-600 mt-2">${badge.description}</p>` : ''}
+      <div class="badge-icon text-6xl mb-4 block drop-shadow-lg">${isEarned ? badge.icon : '❓'}</div>
+      <h3 class="badge-name text-xl font-black text-slate-900 mb-2">${isEarned ? badge.name : '???'}</h3>
+      ${isEarned ? `<p class="badge-description text-sm text-slate-600 mt-2 font-semibold leading-relaxed">${badge.description}</p>` : ''}
     `;
 
     badgesGrid.appendChild(badgeCard);
@@ -734,17 +734,17 @@ function renderFlashcardReview() {
     const cardCount = lesson.questions ? lesson.questions.length : 0;
 
     const categoryCard = document.createElement('button');
-    categoryCard.className = `category-card ${isReviewed ? 'bg-white rounded-2xl shadow-md p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 w-full border-2 border-green-400' : 'bg-white rounded-2xl shadow-md p-6 text-center hover:shadow-xl hover:scale-105 transition-all duration-300 w-full'}`;
+    categoryCard.className = `category-card ${isReviewed ? 'bg-white rounded-3xl shadow-premium border border-emerald-200 p-7 text-center hover:shadow-glow hover:-translate-y-1 transition-all duration-300 w-full border-2 border-emerald-400' : 'bg-white rounded-3xl shadow-premium border border-gray-100 p-7 text-center hover:shadow-glow hover:-translate-y-1 transition-all duration-300 w-full'}`;
     categoryCard.dataset.lessonId = lesson.id;
 
     categoryCard.innerHTML = `
-      <div class="category-icon text-4xl mb-3 block">${level ? level.icon : '📚'}</div>
-      <h3 class="category-name text-lg font-bold text-gray-800">${lesson.name}</h3>
-      <p class="category-meta text-sm text-gray-500 mt-2 space-x-2">
+      <div class="category-icon text-5xl mb-4 block drop-shadow">${level ? level.icon : '📚'}</div>
+      <h3 class="category-name text-xl font-black text-slate-900 mb-2">${lesson.name}</h3>
+      <p class="category-meta text-sm text-slate-600 mt-3 font-bold space-x-2">
         <span class="category-level">${level ? level.name : ''}</span>
-        <span class="category-count">${cardCount} kaarten</span>
+        <span class="category-count">• ${cardCount} kaarten</span>
       </p>
-      ${isReviewed ? '<span class="reviewed-badge inline-block mt-2 bg-green-100 text-green-700 text-xs font-semibold px-3 py-1 rounded-full">✓ Bekeken</span>' : ''}
+      ${isReviewed ? '<span class="reviewed-badge inline-block mt-3 bg-emerald-100 text-emerald-700 text-xs font-bold px-4 py-2 rounded-full">✓ Bekeken</span>' : ''}
     `;
 
     categoryCard.addEventListener('click', () => {
@@ -907,9 +907,11 @@ function loadQuizQuestion() {
 
   question.options.forEach((option, index) => {
     const button = document.createElement('button');
-    button.className = 'option-btn bg-white border-2 border-gray-200 rounded-xl p-5 text-left text-lg font-medium text-gray-700 hover:border-orange-400 hover:shadow-lg transition-all duration-200 w-full';
+    button.className = 'option-btn bg-white border-2 border-gray-200 rounded-2xl p-5 text-left text-lg font-semibold text-slate-700 hover:border-orange-400 hover:bg-orange-50/30 hover:shadow-premium hover:-translate-y-0.5 transition-all duration-200 w-full flex items-center gap-3';
     button.dataset.option = index;
-    button.textContent = option;
+
+    const labels = ['A', 'B', 'C', 'D'];
+    button.innerHTML = `<span class="flex-shrink-0 w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-sm font-bold text-slate-600">${labels[index]}</span><span class="flex-1">${option}</span>`;
 
     button.addEventListener('click', () => handleQuizAnswer(index));
 
@@ -1106,8 +1108,8 @@ function loadMemoryGame() {
 
     cardElement.innerHTML = `
       <div class="memory-card-inner w-full h-full">
-        <div class="memory-card-front card-front bg-gradient-to-br from-orange-400 to-amber-400 rounded-xl flex items-center justify-center text-3xl text-white font-bold shadow-md"></div>
-        <div class="memory-card-back card-back bg-white rounded-xl flex items-center justify-center p-2 text-sm font-semibold text-gray-800 shadow-md border-2 border-orange-300">
+        <div class="memory-card-front card-front bg-gradient-to-br from-orange-500 to-amber-500 rounded-2xl flex items-center justify-center text-4xl text-white font-black shadow-premium border-2 border-orange-300"></div>
+        <div class="memory-card-back card-back bg-white rounded-2xl flex items-center justify-center p-3 text-sm font-bold text-slate-800 shadow-premium border-2 border-orange-400">
           <div class="card-content">${card.back || card.front}</div>
         </div>
       </div>
@@ -1260,7 +1262,7 @@ function loadMatchingGame() {
   leftColumn.innerHTML = '';
   shuffledItems.forEach((item, index) => {
     const itemEl = document.createElement('div');
-    itemEl.className = 'matching-item draggable bg-white rounded-xl shadow-md p-4 text-base font-medium text-gray-700 cursor-grab border-2 border-gray-200 hover:border-orange-400 hover:shadow-lg transition-all';
+    itemEl.className = 'matching-item draggable bg-white rounded-2xl shadow-premium border-2 border-gray-200 p-5 text-base font-bold text-slate-700 cursor-grab hover:border-orange-400 hover:shadow-glow hover:-translate-y-0.5 transition-all';
     itemEl.dataset.matchId = item.target;
     itemEl.textContent = item.content;
 
@@ -1274,7 +1276,7 @@ function loadMatchingGame() {
   rightColumn.innerHTML = '';
   shuffledTargets.forEach((target, index) => {
     const targetEl = document.createElement('div');
-    targetEl.className = 'matching-target drop-target bg-orange-50 rounded-xl shadow-sm p-4 text-base font-medium text-gray-700 border-2 border-dashed border-orange-300 min-h-[60px]';
+    targetEl.className = 'matching-target drop-target bg-orange-50 rounded-2xl shadow-sm p-5 text-base font-bold text-slate-700 border-2 border-dashed border-orange-400 min-h-[70px] flex items-center justify-center';
     targetEl.dataset.matchId = target.id;
     targetEl.innerHTML = `<div class="target-content">${target.content}</div>`;
 
@@ -1544,7 +1546,7 @@ function renderFlashcardDots() {
 
   cards.forEach((card, index) => {
     const dot = document.createElement('span');
-    dot.className = `progress-dot ${index === GameState.flashcardState.currentIndex ? 'active' : 'inactive'}`;
+    dot.className = `progress-dot ${index === GameState.flashcardState.currentIndex ? 'active' : ''}`;
     dotsContainer.appendChild(dot);
   });
 }
@@ -1661,9 +1663,11 @@ function loadSituationQuestion() {
 
   question.options.forEach((option, index) => {
     const button = document.createElement('button');
-    button.className = 'option-btn bg-white border-2 border-gray-200 rounded-xl p-5 text-left text-lg font-medium text-gray-700 hover:border-orange-400 hover:shadow-lg transition-all duration-200 w-full';
+    button.className = 'option-btn bg-white border-2 border-gray-200 rounded-2xl p-5 text-left text-lg font-semibold text-slate-700 hover:border-orange-400 hover:bg-orange-50/30 hover:shadow-premium hover:-translate-y-0.5 transition-all duration-200 w-full flex items-center gap-3';
     button.dataset.option = index;
-    button.textContent = option;
+
+    const labels = ['A', 'B', 'C', 'D'];
+    button.innerHTML = `<span class="flex-shrink-0 w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-sm font-bold text-slate-600">${labels[index]}</span><span class="flex-1">${option}</span>`;
 
     button.addEventListener('click', () => handleSituationAnswer(index));
 
@@ -2054,10 +2058,10 @@ function showResults(results) {
     badgesEarned.innerHTML = '<h3 class="text-2xl font-bold text-gray-800 mb-4">Nieuwe Badges!</h3>';
     newBadges.forEach((badge, index) => {
       const badgeEl = document.createElement('div');
-      badgeEl.className = 'badge-earned inline-flex flex-col items-center gap-2 bg-white rounded-2xl shadow-lg p-4 m-2';
+      badgeEl.className = 'badge-earned inline-flex flex-col items-center gap-3 bg-white rounded-3xl shadow-premium border border-gray-100 p-6 m-2';
       badgeEl.innerHTML = `
-        <div class="badge-icon text-4xl">${badge.icon}</div>
-        <div class="badge-name text-sm font-bold text-gray-800">${badge.name}</div>
+        <div class="badge-icon text-5xl drop-shadow-lg">${badge.icon}</div>
+        <div class="badge-name text-base font-black text-slate-900">${badge.name}</div>
       `;
 
       setTimeout(() => {
@@ -2117,17 +2121,34 @@ function triggerConfetti() {
   if (!container) return;
 
   container.innerHTML = '';
-  const colors = ['#FF6B35', '#004E89', '#2EC4B6', '#06D6A0', '#FFD166', '#EF476F', '#7B2D8E'];
+  const colors = ['#f97316', '#fb923c', '#fbbf24', '#10b981', '#3b82f6', '#8b5cf6', '#ec4899'];
+  const shapes = ['circle', 'square', 'triangle'];
 
-  for (let i = 0; i < 50; i++) {
+  for (let i = 0; i < 80; i++) {
     const piece = document.createElement('div');
     piece.className = 'confetti-piece';
     piece.style.left = Math.random() * 100 + '%';
     piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-    piece.style.animationDelay = Math.random() * 2 + 's';
-    piece.style.animationDuration = (Math.random() * 2 + 2) + 's';
-    piece.style.width = (Math.random() * 8 + 4) + 'px';
-    piece.style.height = (Math.random() * 8 + 4) + 'px';
+    piece.style.animationDelay = Math.random() * 1.5 + 's';
+    piece.style.animationDuration = (Math.random() * 2 + 2.5) + 's';
+
+    const size = Math.random() * 10 + 6;
+    piece.style.width = size + 'px';
+    piece.style.height = size + 'px';
+
+    const shape = shapes[Math.floor(Math.random() * shapes.length)];
+    if (shape === 'circle') {
+      piece.style.borderRadius = '50%';
+    } else if (shape === 'triangle') {
+      piece.style.width = '0';
+      piece.style.height = '0';
+      piece.style.borderLeft = size/2 + 'px solid transparent';
+      piece.style.borderRight = size/2 + 'px solid transparent';
+      piece.style.borderBottom = size + 'px solid ' + piece.style.backgroundColor;
+      piece.style.backgroundColor = 'transparent';
+    }
+
+    piece.style.opacity = Math.random() * 0.5 + 0.5;
     container.appendChild(piece);
   }
 
@@ -2136,7 +2157,7 @@ function triggerConfetti() {
   setTimeout(() => {
     container.classList.remove('active');
     container.innerHTML = '';
-  }, 4000);
+  }, 5000);
 }
 
 /**
@@ -2365,6 +2386,12 @@ function initEventListeners() {
     btnFlip.addEventListener('click', flipFlashcard);
   }
 
+  // Click-to-flip on the card itself
+  const flashcardEl = document.getElementById('flashcard');
+  if (flashcardEl) {
+    flashcardEl.addEventListener('click', flipFlashcard);
+  }
+
   const btnFlashcardPrev = document.getElementById('btn-flashcard-prev');
   if (btnFlashcardPrev) {
     btnFlashcardPrev.addEventListener('click', prevFlashcard);
@@ -2389,6 +2416,12 @@ function initEventListeners() {
   const btnReviewFlip = document.getElementById('btn-review-flip');
   if (btnReviewFlip) {
     btnReviewFlip.addEventListener('click', flipStandaloneFlashcard);
+  }
+
+  // Click-to-flip on the review card itself
+  const reviewFlashcardEl = document.getElementById('review-flashcard');
+  if (reviewFlashcardEl) {
+    reviewFlashcardEl.addEventListener('click', flipStandaloneFlashcard);
   }
 
   const btnReviewPrev = document.getElementById('btn-review-prev');
