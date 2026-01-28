@@ -54,6 +54,8 @@ js/app.js           - Spellogica, navigatie, 6 game engines, Tailwind classes
 - [x] **UI REDESIGN - Tailwind CSS + 22 integration fixes**
 - [x] **Browser testing - Splash, Home, Map, Level, Quiz OK**
 - [x] GitHub Pages deployment: https://donniedarko95.github.io/fietsquiz/
+- [x] **Flashcard bug fix - 3 critical bugs fixed**
+- [x] **Professional UI redesign - Nunito font, premium shadows, letter labels, animations**
 
 ---
 
@@ -339,4 +341,54 @@ The static HTML was rewritten with Tailwind CSS (using Play CDN), but JavaScript
 ### Status
 - [x] All 12 element types updated with Tailwind classes
 - [x] Changes verified by reading updated file
-- [ ] Browser testing needed to verify visual consistency
+- [x] Browser testing verified visual consistency
+
+---
+
+## Professional UI Redesign + Flashcard Bug Fix - 2026-01-28
+
+### Flashcard Bugs Fixed (3 bugs)
+
+#### BUG #1: CSS position conflict (Critical)
+**File**: `css/style.css`
+**Problem**: `.flashcard-inner { position: relative; }` overrode Tailwind's `absolute` class, causing the inner div to collapse to zero height (no content in flow since children are absolute)
+**Fix**: Removed `position: relative` from `.flashcard-inner` CSS rule
+
+#### BUG #2: Missing relative on flashcard wrapper (Critical)
+**File**: `index.html`
+**Problem**: `#flashcard` and `#review-flashcard` divs lacked `position: relative`, so absolutely positioned children had no positioned ancestor
+**Fix**: Added `relative` class to both flashcard wrapper divs
+
+#### BUG #3: No click-to-flip on card itself
+**File**: `js/app.js`
+**Problem**: Only the "Draai om" button triggered flip, not clicking the card
+**Fix**: Added click event listeners on `#flashcard` and `#review-flashcard` elements
+
+### Design Upgrade Summary
+- **Font**: Nunito from Google Fonts (weights 400-900)
+- **Tailwind Config**: Extended with `shadow-premium`, `shadow-glow`, primary color palette
+- **Home**: Larger avatar, colored stat cards (blue/amber/emerald tints), XP shimmer animation
+- **Bottom Nav**: Frosted glass (`backdrop-blur-xl bg-white/80`), active dot indicator
+- **Level Map**: Polished gradient background, better level nodes
+- **Level Detail**: Rich orange header with dot pattern
+- **Quiz/Situation**: Letter labels (A/B/C/D) in circular badges
+- **Flashcards**: Diagonal stripe pattern, premium shadows, embossed borders
+- **Memory/Matching**: Enhanced 3D depth, better shadows
+- **Results**: Animated gradient background, golden star glow, enhanced confetti (80 pieces, 3 shapes)
+- **Feedback**: Larger text, better backdrop blur
+- **CSS**: Added shimmer, ctaPulse, starGlow, resultsGradient keyframe animations
+- **Cleanup**: Removed unused `.skeleton` class and duplicate `@keyframes shimmer`
+
+### Files Modified
+- `index.html` - All 8 screens upgraded, Google Fonts added, Tailwind config extended
+- `css/style.css` - New animations, flashcard position fix, removed dead code
+- `js/app.js` - All 12 dynamic element types upgraded, flashcard click handlers, better confetti
+
+### Browser Testing
+- [x] Home dashboard - Premium card styling, colored stats, Nunito font
+- [x] Level map - Clean level cards with connectors
+- [x] Level detail - Rich header, lesson cards with mode icons
+- [x] Quiz mode - Letter labels (A/B/C/D), correct/incorrect feedback
+- [x] Flashcard mode - 3D flip working, card displays properly, navigation works
+- [x] No console errors
+- [x] Deployed to https://donniedarko95.github.io/fietsquiz/
