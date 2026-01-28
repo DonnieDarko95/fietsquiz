@@ -1749,7 +1749,7 @@ function startStandaloneFlashcards(lessonId) {
   const reviewContainer = document.getElementById('review-flashcard-container');
 
   if (categorySelector) categorySelector.style.display = 'none';
-  if (reviewContainer) reviewContainer.style.display = 'flex';
+  if (reviewContainer) reviewContainer.style.display = 'block';
 
   loadStandaloneFlashcard();
 }
